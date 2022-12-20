@@ -1,0 +1,88 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Ubuntu, sans-serif;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.form {
+  min-width: 600px;
+  margin: 30px 0;
+  padding: 50px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background: white;
+  border-radius: 4px;
+  box-shadow: rgb(60 66 87 / 12%) 0px 7px 14px 0px,
+    rgb(0 0 0 / 12%) 0px 3px 6px 0px;
+}
+
+.content {
+  margin: 0 auto;
+  max-width: 500px;
+  width: 1000%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-container.file {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+}
+
+input,
+#btnReadFile {
+  margin: 10px 0;
+}
+
+input[type="text"] {
+  opacity: 0.8;
+}
+
+input[type="text"],
+button {
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 4px;
+}
+
+.input-container.chassi {
+  width: 80%;
+}
+
+.btns-container{
+  width: 80%;
+  margin: 0 auto;
+}
+
+button {
+  background-color: rgb(84, 105, 212);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button[disabled] {
+  background-color: #c6c6c6;
+  cursor: not-allowed;
+}
