@@ -1,6 +1,8 @@
 const { app, BrowserWindow, Menu } = require('electron');
 const path =require('path');
 
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'; // Gambiarra para security.
+
 function createWindow() {
     const win = new BrowserWindow({
       width: 1300,
@@ -15,15 +17,14 @@ function createWindow() {
       },
     });
   
-    win.loadFile("./src/home/index.html");
+    win.loadFile("./pages/login/index.html");
   
     win.once("ready-to-show", function () {
       win.show();
 
-      win.webContents.openDevTools();
+    //   win.webContents.openDevTools(); // openDevTools
 
-      const menuTemplate = [
-        {
+      let menuTemplate = [{
           label:"Aplicações",
           submenu: [
             {
@@ -93,8 +94,10 @@ function createWindow() {
                 label:"VW",
             }
           ]
-        },
-      ];
+        },];
+
+      process.plataform == 'darwin' ? menuTemplate.unshift({label: app.getName()}) : menuTemplate;
+
       const menu = Menu.buildFromTemplate(menuTemplate);
       Menu.setApplicationMenu(menu);
     });

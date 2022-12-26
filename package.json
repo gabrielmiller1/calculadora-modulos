@@ -19,5 +19,8 @@
   "homepage": "https://github.com/gabrielmiller1/calculadora-modulos#readme",
   "devDependencies": {
     "electron": "^21.3.0"
+  },
+  "dependencies": {
+    "iconv-lite": "^0.6.3"
   }
 }

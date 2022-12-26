@@ -121,7 +121,7 @@ label {
   align-items: center;
 }
 
-.field input {
+.field input, #logado {
   font-size: 16px;
   line-height: 28px;
   padding: 8px 16px;
@@ -137,7 +137,7 @@ label {
     rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 
-input[type="submit"] {
+input[type="submit"], #logado {
   background-color: rgb(84, 105, 212);
   box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
     rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, rgb(84, 105, 212) 0px 0px 0px 1px,

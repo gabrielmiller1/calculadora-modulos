@@ -31,11 +31,11 @@ main {
 .content {
   margin: 0 auto;
   max-width: 500px;
-  width: 1000%;
+  width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
   flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 55px;
 }
 
 .input-container {
@@ -46,7 +46,7 @@ main {
 .input-container.file {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 85%;
   margin: 0 auto;
 }
 
@@ -67,15 +67,15 @@ button {
 }
 
 .input-container.chassi {
-  width: 80%;
+  width: 85%;
 }
 
 .btns-container{
-  width: 80%;
+  width: 85%;
   margin: 0 auto;
 }
 
-button {
+.btns-container button {
   background-color: rgb(84, 105, 212);
   color: #fff;
   font-weight: 700;
@@ -85,4 +85,17 @@ button {
 button[disabled] {
   background-color: #c6c6c6;
   cursor: not-allowed;
+}
+
+#go-back-button{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+#go-back-button img{
+  height: 35px;
 }
