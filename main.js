@@ -5,9 +5,9 @@ process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'; // Gambiarra para se
 
 function createWindow() {
     const win = new BrowserWindow({
-      width: 1300,
+      width: 1200,
       resizable: false,
-      height: 750,
+      height: 650,
       backgroundColor: "rgba(237, 237, 237, 1)",
       show: false,
       icon: path.join(__dirname, "assets/icons/icon.png"),

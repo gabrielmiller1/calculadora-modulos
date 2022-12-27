@@ -8,20 +8,30 @@ const inputMECKey = document.querySelector("#mec-key");
 const btnReadFile = document.querySelector("#btnReadFile");
 const btnEdit = document.querySelector("#btnEdit");
 const btnSave = document.querySelector("#btnSave");
+
 const Buffer = require('buffer').Buffer;
+
+let buffer;
+let file;
 
 btnReadFile.addEventListener("click", function () {
   try {
-    const file = inputFile.files[0]; // Lê o arquivo selecionado.
+    file = inputFile.files[0]; // Lê o arquivo selecionado.
 
     if (!file) {
       throw new Error("Nenhum arquivo selecionado");
     }
 
+    console.log(file.type);
+
+    if (!file.type.startsWith("application/") || file.size !== 512) {
+      throw new Error("Arquivo inválido");
+    }
+
     const reader = new FileReader(); // Cria um leitor de arquivo.
 
     reader.onload = function () {
-      const buffer = reader.result;// Resultado da leitura.
+      buffer = reader.result;// Resultado da leitura.
 
       const data = new Uint8Array(buffer);// Converte para Unit8Array.
 
@@ -49,60 +59,61 @@ btnReadFile.addEventListener("click", function () {
       btnEdit.addEventListener("click", function (e) {
         let inputs = document.querySelectorAll('input[type="text"]');
         document.querySelector('#btnSave').removeAttribute('disabled');
-        inputs.forEach(item => item.removeAttribute('disabled'));
-
-        btnReadFile.setAttribute("disabled", "disabled");
-      })
-
-      document.querySelector('#btnEdit').removeAttribute('disabled');
-
-      btnSave.addEventListener("click", function () { // Salvando entrada.
-
-        // Tratando entrada.
-        password1 = hexToAscii(inputPassword1.value);
-        password2 = hexToAscii(inputPassword2.value);
-        chassi = inputChassi.value;
-        // waitingTime1 = hexToAscii(inputWaitingTime.value);
-        // waitingTime2 = hexToAscii(inputWaitingTime.value);
-        cs = hexToAscii(inputCS.value); // problema
-        mecKey = inputMECKey.value;
-
-        const dataView = new DataView(buffer);
-
-        // Atualiza valores novo arquivo.
-        updateData(password1, dataView, 26);
-        updateData(password2, dataView, 178);
-        updateData(chassi, dataView, 68);
-        // updateData(waitingTime1, dataView, 30);
-        // updateData(waitingTime2, dataView, 182);
-        updateData(cs, dataView, 189);
-        updateData(mecKey, dataView, 86);
-
-        // Criando um novo array de bytes a partir do objeto DataView.
-        const modifiedArrayBuffer = dataView.buffer.slice(dataView.byteOffset, dataView.byteLength);
-
-        // Criando um novo arquivo a partir do array de bytes modificado.
-        const modifiedFile = new File([modifiedArrayBuffer], file.name.slice(0, -4) + "-modificado.bin", {
-          type: file.type,
+        inputs.forEach(item => {
+          if(item.id == 'waiting-time') return;
+          item.removeAttribute('disabled')
         });
 
-        saveAs(modifiedFile);
-        
-        new Notification('Arquivo Salvo', {
-          body: `Arquivo ${file.name} foi modificado e salvo.`,
-        })
-
-        // Limpando inputs para nova leitura.
-        resetInputsAndButtons();
+        btnReadFile.setAttribute("disabled", "disabled");
       });
+
+      document.querySelector('#btnEdit').removeAttribute('disabled');
     };
 
     reader.readAsArrayBuffer(file);
   } catch (error) {
-    console.error(error);
-    alert('Ocorreu um erro ao ler o arquivo: ' + error.message);
+    console.log(error);
   }
 });
+
+function salvar() {
+  // Valida os inputs antes de continuar.
+  if (!validateInputs()) return;
+
+  // Tratando entrada.
+  password1 = hexToAscii(inputPassword1.value);
+  password2 = hexToAscii(inputPassword2.value);
+  chassi = inputChassi.value;
+  // waitingTime1 = hexToAscii(inputWaitingTime.value);
+  // waitingTime2 = hexToAscii(inputWaitingTime.value);
+  cs = hexToAscii(inputCS.value); // problema
+  mecKey = inputMECKey.value;
+
+  const dataView = new DataView(buffer);
+
+  // Atualiza valores novo arquivo.
+  updateData(password1, dataView, 26);
+  updateData(password2, dataView, 178);
+  updateData(chassi, dataView, 68);
+  // updateData(waitingTime1, dataView, 30);
+  // updateData(waitingTime2, dataView, 182);
+  updateData(cs, dataView, 189);
+  updateData(mecKey, dataView, 86);
+
+  const newFile = new File([buffer], `${file.name.slice(0, -4)}-modificado.bin`, { type: file.type }); // Cria um novo arquivo.
+
+  // Faz download do arquivo.
+  saveAs(newFile);
+
+  new Notification('Arquivo Salvo', {
+    body: `Arquivo ${file.name} foi modificado e salvo.`,
+  })
+
+  // Limpando inputs para nova leitura.
+  resetInputsAndButtons();
+}
+
+btnSave.addEventListener("click", salvar);
 
 function updateData(value, dataView, initIndex) {
   try {
@@ -169,5 +180,35 @@ function resetInputsAndButtons() {
   inputMECKey.value = '';
 }
 
+function validateInputs() {
+  const errorMessages = document.querySelectorAll('.error-message');
+  
+  // Remove todos os elementos "error-message" da tela.
+  errorMessages.forEach(errorMessage => errorMessage.remove());
+  
+  if (inputPassword1.value.length != 4) {
+    const error = document.createElement('p');
+    error.classList.add('error-message');
+    error.innerText = 'O campo deve ter exatamente 4 caracteres';
+    inputPassword1.parentNode.insertBefore(error, inputPassword1.nextSibling);
+  }
+  
+  if (inputPassword2.value.length != 4) {
+    const error = document.createElement('p');
+    error.classList.add('error-message');
+    error.innerText = 'O campo deve ter exatamente 4 caracteres';
+    inputPassword2.parentNode.insertBefore(error, inputPassword2.nextSibling);
+  }
+  
+  if (inputChassi.value.length != 17) {
+    const error = document.createElement('p');
+    error.classList.add('error-message');
+    error.innerText = 'O campo deve ter exatamente 17 caracteres';
+    inputChassi.parentNode.insertBefore(error, inputChassi.nextSibling);
+  }
+  
+  // Retorna true se não houver elementos "error-message" na tela.
+  return !document.querySelector('.error-message');
+}
 
 
