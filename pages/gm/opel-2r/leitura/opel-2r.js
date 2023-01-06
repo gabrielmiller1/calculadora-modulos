@@ -11,6 +11,8 @@ const btnSave = document.querySelector("#btnSave");
 
 const Buffer = require('buffer').Buffer;
 
+const { ipcRenderer } = require('electron');
+
 let buffer;
 let file;
 
@@ -48,8 +50,8 @@ btnReadFile.addEventListener("click", function () {
       const password = password1 === password2 ? password1 : "";
 
       // Apresentando valores para usuario.
-      inputPassword1.value = password != "" ? password : "Senhas diferentes";
-      inputPassword2.value = password != "" ? password : "Senhas diferentes";
+      inputPassword1.value = password != "" ? password : `Diferentes, ${password1}`;
+      inputPassword2.value = password != "" ? password : `Diferentes, ${password2}`;
       inputChassi.value = chassi;
       inputWaitingTime.value = waitingTime1 != 'a6a5' ? 'Ativo' : 'Inativo';
       // inputWaitingTime.value = waitingTime2;
@@ -60,7 +62,7 @@ btnReadFile.addEventListener("click", function () {
         let inputs = document.querySelectorAll('input[type="text"]');
         document.querySelector('#btnSave').removeAttribute('disabled');
         inputs.forEach(item => {
-          if(item.id == 'waiting-time') return;
+          if (item.id == 'waiting-time') return;
           item.removeAttribute('disabled')
         });
 
@@ -105,8 +107,8 @@ function salvar() {
   // Faz download do arquivo.
   saveAs(newFile);
 
-  new Notification('Arquivo Salvo', {
-    body: `Arquivo ${file.name} foi modificado e salvo.`,
+  new Notification('Arquivo Modificado', {
+    body: `Arquivo ${file.name} foi modificado.`,
   })
 
   // Limpando inputs para nova leitura.
@@ -182,33 +184,44 @@ function resetInputsAndButtons() {
 
 function validateInputs() {
   const errorMessages = document.querySelectorAll('.error-message');
-  
+
   // Remove todos os elementos "error-message" da tela.
   errorMessages.forEach(errorMessage => errorMessage.remove());
-  
+
   if (inputPassword1.value.length != 4) {
     const error = document.createElement('p');
     error.classList.add('error-message');
-    error.innerText = 'O campo deve ter exatamente 4 caracteres';
+    error.innerText = 'Exatamente 4 caracteres.';
     inputPassword1.parentNode.insertBefore(error, inputPassword1.nextSibling);
   }
-  
+
   if (inputPassword2.value.length != 4) {
     const error = document.createElement('p');
     error.classList.add('error-message');
-    error.innerText = 'O campo deve ter exatamente 4 caracteres';
+    error.innerText = 'Exatamente 4 caracteres.';
     inputPassword2.parentNode.insertBefore(error, inputPassword2.nextSibling);
   }
-  
+
   if (inputChassi.value.length != 17) {
     const error = document.createElement('p');
     error.classList.add('error-message');
-    error.innerText = 'O campo deve ter exatamente 17 caracteres';
+    error.innerText = 'Exatamente 17 caracteres.';
     inputChassi.parentNode.insertBefore(error, inputChassi.nextSibling);
   }
-  
+
+  // if (inputPassword1.value != inputPassword2.value) {
+  //   const error = document.createElement('p');
+  //   error.classList.add('error-message');
+  //   error.innerText = 'Senhas devem ser iguais.';
+  //   inputPassword1.parentNode.insertBefore(error, inputPassword1.nextSibling);
+  //   inputPassword2.parentNode.insertBefore(error, inputPassword2.nextSibling);
+  // }
+
   // Retorna true se não houver elementos "error-message" na tela.
   return !document.querySelector('.error-message');
 }
 
-
+const backButton = document.getElementById('go-back-button');
+backButton.addEventListener('click', () => {
+  ipcRenderer.send('go-back');
+});

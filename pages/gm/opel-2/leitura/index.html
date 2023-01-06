@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora Modulos - BETA - OPEL 2R TMS370</title>
+  <link rel="stylesheet" href="./opel-tms.css" />
+</head>
+
+<body>
+  <main>
+    <a href="../../login/index.html">
+      <button id="go-back-button">
+        <img src="../../../assets/go-back-2.svg" alt="go back">
+      </button>
+    </a>
+    <h1 class="page-title">Leitura de Arquivo - OPEL 2R TMS370</h1>
+    <div class="form" action="">
+      <div class="content">
+        <div class="input-container file">
+          <label for="arquivo">Escolher Arquivo</label>
+          <input type="file" name="file" id="file" />
+        </div>
+        <div class="input-group1">
+          <div class="input-container">
+            <label for="">Senha 1</label>
+            <input minlength="4" maxlength="4" type="text" name="password1" placeholder="Senha 1" value="" id="password1" disabled />
+          </div>
+          <div class="input-container">
+            <label for="">Chassi</label>
+            <input minlength="17" maxlength="17"type="text" name="chassi" placeholder="Chassi" value="" id="chassi" disabled />
+          </div>
+          <!-- <div class="input-container">
+            <label for="">Tempo de espera</label>
+            <input type="text" name="waiting-time" placeholder="Tempo de espera" value="" id="waiting-time" disabled />
+          </div> -->
+        </div>
+        <div class="input-group2">
+          <div class="input-container">
+            <label for="">Senha 2</label>
+            <input minlength="4" maxlength="4" type="text" name="password2" placeholder="Senha 2" value="" id="password2" disabled />
+          </div>
+          <div class="input-container">
+            <label for="">Chave MEC</label>
+            <input type="text" name="mec-key" placeholder="Chave MEC" value="" id="mec-key" disabled />
+          </div>
+          <!-- <div class="input-container">
+            <label for="">Componente de Segurança</label>
+            <input type="text" name="cs" placeholder="Componente de Segurança" value="" id="cs" disabled />
+          </div> -->
+        </div>  
+      </div>
+      <div class="btns-container">
+        <button id="btnReadFile">Ler arquivo</button>
+        <button id="btnEdit" disabled>Editar</button>
+        <button id="btnSave" disabled>Salvar</button>
+      </div>
+    </div>
+  </main>
+  <script src="./opel-tms.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    const { remote } = require('electron');
+
+    const goBackButton = document.getElementById('go-back-button');
+
+    goBackButton.addEventListener('click', () => {
+      // Adicionar logica voltar pagina anterior.
+    });
+  </script>
+</body>
+
+</html>

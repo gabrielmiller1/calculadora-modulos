@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="../../assets/styles/global.css">
+
+    <!----===== Boxicons CSS ===== -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+
+    <title>Calculadora Modulos</title>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="../../assets/images/geral/logo.png" alt="">
+                </span>
+
+                <div class="text logo-text">
+                    <span class="name">Calculadora</span>
+                    <span class="profession">Modulos</span>
+                </div>
+            </div>
+
+            <i class='bx bx-chevron-right toggle'></i>
+        </header>
+
+        <div class="menu-bar">
+            <div class="menu">
+                <!-- Implementar busca no final do projeto -->
+                <!-- <li class="search-box">
+                    <i class='bx bx-search icon'></i>
+                    <input type="text" placeholder="Procurar...">
+                </li> -->
+
+                <ul class="menu-links">
+                    <li class="nav-link ">
+                        <a href="#" class="active" data-category="init">
+                            <i class='bx bx-home-alt icon'></i>
+                            <span class="text nav-text">Home</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link disabled">
+                        <a href="#" data-category="body-computer">
+                            <i class='bx bx-car icon'></i>
+                            <span class="text nav-text">Body</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link disabled">
+                        <a href="#" data-category="ecu">
+                            <i class='bx bx-hdd icon'></i>
+                            <span class="text nav-text">ECU</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#" class="" data-category="imobilizador">
+                            <i class='bx bx-microchip icon'></i>
+                            <span class="text nav-text">Imobilizador</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link disabled">
+                        <a href="#">
+                            <i class='bx bx-card icon'></i>
+                            <span class="text nav-text">Painel</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="bottom-content">
+                <li class="">
+                    <a href="#">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">Sair</span>
+                    </a>
+                </li>
+
+                <!-- <li class="mode">
+                    <div class="sun-moon">
+                        <i class='bx bx-moon icon moon'></i>
+                        <i class='bx bx-sun icon sun'></i>
+                    </div>
+                    <span class="mode-text text">Light</span>
+
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+                </li> -->
+
+            </div>
+        </div>
+
+    </nav>
+
+    <section class="home">
+        <div class="text">Home</div>
+        <div class="content init">
+            <h2>Bem vindo!</h2>
+        </div>
+        <div class="content imobilizador hidden">
+            <div class="brand__card">
+                <div class="card__header">
+                    <img src="../../assets/images/geral/montadoras-logos/bmw-logo.png" alt="">
+                    <p>GM</p>
+                    <i class='bx bx-chevron-right icon'></i>
+                </div>
+                <div class="card__body collapsed">
+                    <ul>
+                        <a href="../gm/opel-2r/leitura/index.html">
+                            <li>Leitura - OPEL 2R</li>
+                        </a>
+                        <a href="../gm/opel-2/leitura/index.html">
+                            <li>Leitura - OPEL 2</li>
+                        </a>
+                        <hr>
+                        <br>
+                        <a href="../gm/opel-2r/casamento/index.html">
+                            <li>Casamento - OPEL 2R - ECU VHC</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <div class="brand__card disabled">
+                <div class="card__header">
+                    <img src="../../assets/images/geral/montadoras-logos/bmw-logo.png" alt="">
+                    <p>BMW</p>
+                    <i class='bx bx-chevron-right icon'></i>
+                </div>
+                <div class="card__body collapsed">
+                    <ul>
+                        <a href="">
+                            <li>Correção FRM</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <div class="brand__card disabled">
+                <div class="card__header">
+                    <img src="../../assets/images/geral/montadoras-logos/bmw-logo.png" alt="">
+                    <p>FIAT</p>
+                    <i class='bx bx-chevron-right icon'></i>
+
+                </div>
+                <div class="card__body collapsed">
+                    <ul>
+                        <a href="">
+                            <li>Correção FRM</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <div class="brand__card disabled">
+                <div class="card__header">
+                    <img src="../../assets/images/geral/montadoras-logos/bmw-logo.png" alt="">
+                    <p>FORD</p>
+                    <i class='bx bx-chevron-right icon'></i>
+
+                </div>
+                <div class="card__body collapsed">
+                    <ul>
+                        <a href="">
+                            <li>Correção FRM</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <div class="brand__card disabled">
+                <div class="card__header">
+                    <img src="../../assets/images/geral/montadoras-logos/bmw-logo.png" alt="">
+                    <p>HYUNDAI</p>
+                    <i class='bx bx-chevron-right icon'></i>
+
+                </div>
+                <div class="card__body collapsed">
+                    <ul>
+                        <a href="">
+                            <li>Correção FRM</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <div class="brand__card disabled">
+                <div class="card__header">
+                    <img src="../../assets/images/geral/montadoras-logos/bmw-logo.png" alt="">
+                    <p>IVECO</p>
+                    <i class='bx bx-chevron-right icon'></i>
+
+                </div>
+                <div class="card__body collapsed">
+                    <ul>
+                        <a href="">
+                            <li>Correção FRM</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <div class="brand__card disabled">
+                <div class="card__header">
+                    <img src="../../assets/images/geral/montadoras-logos/bmw-logo.png" alt="">
+                    <p>KIA</p>
+                    <i class='bx bx-chevron-right icon'></i>
+
+                </div>
+                <div class="card__body collapsed">
+                    <ul>
+                        <a href="">
+                            <li>Correção FRM</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <div class="brand__card disabled">
+                <div class="card__header">
+                    <img src="../../assets/images/geral/montadoras-logos/bmw-logo.png" alt="">
+                    <p>RENAULT</p>
+                    <i class='bx bx-chevron-right icon'></i>
+
+                </div>
+                <div class="card__body collapsed">
+                    <ul>
+                        <a href="">
+                            <li>Correção FRM</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <div class="brand__card disabled">
+                <div class="card__header">
+                    <img src="../../assets/images/geral/montadoras-logos/bmw-logo.png" alt="">
+                    <p>VW</p>
+                    <i class='bx bx-chevron-right icon'></i>
+
+                </div>
+                <div class="card__body collapsed">
+                    <ul>
+                        <a href="">
+                            <li>Correção FRM</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

@@ -108,8 +108,13 @@ button[disabled] {
   height: 35px;
 }
 
+#go-back-button {
+  transition: all 0.3s ease-in-out;
+}
+
 .error-message {
   color: red;
   font-size: 12px;
   display: inline-block;
 }
+

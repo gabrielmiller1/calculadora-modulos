@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casamento - Opel 2R ECU VHC</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="../../../../assets/styles/global.css">
+
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="header">
+            <img src="../../../../assets/images/geral/logo.png" alt="" class="logo">
+            <img id="go-back-button" src="../../../../assets/images/geral/montadoras-logos/bmw-logo.png" alt="voltar">
+        </div>
+    </nav>
+    <section class="content">
+        <h1 class="text">Casamento - Opel 2R ECU VHC</h1>
+        <div class="button-toggle-form">
+            <button class="active">Casamento - Opel 2R ECU VHC</button>
+        </div>
+        <div class="form">
+            <div class="form-group1">
+                <div class="input-container file">
+                    <!-- <label for="arquivo">Escolher Arquivo</label> -->
+                    <input type="file" name="file" id="fileIMMO" />
+                </div>
+                <div class="container-form-group">
+                    <div class="input-container">
+                        <label for="">Senha</label>
+                        <input minlength="4" maxlength="4" type="text" name="password1" placeholder="Senha" value=""
+                            id="passwordIMMO" disabled />
+                    </div>
+                    <div class="input-container">
+                        <label for="">Chave MEC</label>
+                        <input type="text" name="mec-key" placeholder="Chave MEC" value="" id="mec-keyIMMO" disabled />
+                    </div>
+                </div>
+                <div class="input-container">
+                    <label for="">Chassi</label>
+                    <input minlength="17" maxlength="17" type="text" name="chassi" placeholder="Chassi" value=""
+                        id="chassiIMMO" disabled />
+                </div>
+                <div class="btns-container">
+                    <button id="btnReadFileIMMO">Ler informações</button>
+                    <button id="btnIMMOToECU" disabled>IMMO -> ECU</button>
+                </div>
+            </div>
+            <div class="form-group2">
+                <div class="input-container file">
+                    <!-- <label for="arquivo">Escolher Arquivo</label> -->
+                    <input type="file" name="file" id="fileECU" />
+                </div>
+                <div class="input-container">
+                    <label for="">Senha</label>
+                    <input minlength="4" maxlength="4" type="text" name="password1" placeholder="Senha" value=""
+                        id="passwordECU" disabled />
+                </div>
+                <div class="input-container">
+                    <label for="">Chassi</label>
+                    <input minlength="17" maxlength="17" type="text" name="chassi" placeholder="Chassi" value=""
+                        id="chassiECU" disabled />
+                </div>
+                <div class="btns-container">
+                    <button id="btnReadFileECU">Ler informações</button>
+                    <button id="btnECUToIMMO" disabled>ECU -> IMMO</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="./index.js"></script>
+</body>
+
+</html>

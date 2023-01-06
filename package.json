@@ -21,6 +21,7 @@
     "electron": "^21.3.0"
   },
   "dependencies": {
+    "file-saver": "^2.0.5",
     "iconv-lite": "^0.6.3"
   }
 }
