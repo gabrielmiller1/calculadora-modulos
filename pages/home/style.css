@@ -421,6 +421,7 @@ body.dark .home .text {
     align-items: center;
     justify-content: flex-start;
     gap: 15px;
+    padding: 0 5px;
 }
 
 .card__header p {
@@ -429,6 +430,7 @@ body.dark .home .text {
 
 .brand__card img {
     height: 45px;
+    padding: 5px 0;
 }
 
 .collapsed {

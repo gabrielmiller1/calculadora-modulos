@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Casamento</title>
+</head>
+
+<body>
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <div class="container">
+        <div class="column">
+            <input type="file">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <button>Button 1</button>
+            <button>Button 2</button>
+        </div>
+        <div class="column">
+            <input type="file">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <button>Button 1</button>
+            <button>Button 2</button>
+        </div>
+    </div>
+</body>
+
+</html>

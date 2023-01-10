@@ -4,10 +4,13 @@
     left: 0;
     height: 100%;
     width: 88px;
-    padding: 10px 14px;
+    padding: 10px 14px 35px;
     background: var(--sidebar-color);
     transition: var(--tran-05);
     z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .sidebar .header {
@@ -23,6 +26,19 @@
     cursor: pointer;
 }
 
+.bottom-content li {
+    list-style: none;
+}
+
+.bottom-content li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 30px;
+    color: var(--text-color);
+}
+
 .content {
     position: absolute;
     top: 0;
@@ -32,63 +48,145 @@
     background-color: var(--body-color);
     transition: var(--tran-05);
     padding: 0 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .content .text {
+    align-self: flex-start;
     font-size: 30px;
     font-weight: 500;
     color: var(--text-color);
-    padding: 12px 60px;
+    padding: 12px 0px;
 }
 
-.button-toggle-form{
-    margin: 75px auto 0;
+.button-toggle-form {
+    margin: 30px auto 0;
     width: 100%;
     display: flex;
 }
 
-.button-toggle-form button.active{
+.button-toggle-form button.active {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 5px 15px;
     background-color: var(--sidebar-color);
     color: var(--primary-color);
     border: transparent;
+    z-index: 10;
 }
 
-.button-toggle-form button{
+.button-toggle-form button {
     background-color: var(--primary-color);
     color: var(--sidebar-color);
-    border-radius:  6px 6px 0 0;
+    border-radius: 6px 6px 0 0;
 }
 
 .form {
     width: 100%;
     margin: 0px auto 40px;
-    display: flex;
-    gap: 20px 0;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 70px 130px;
+    gap: 20px 40px;
+    padding: 25px 45px;
     background-color: var(--sidebar-color);
     border-radius: 0 6px 6px 6px;
     -webkit-box-shadow: 0px 0px 30px -12px rgba(0, 0, 0, 0.37);
     -moz-box-shadow: 0px 0px 30px -12px rgba(0, 0, 0, 0.37);
     box-shadow: 0px 0px 30px -12px rgba(0, 0, 0, 0.37);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.form-group1,
+.form-group2 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0 10px;
+}
+
+.form-group1 .input-container:nth-of-type(1) {
+    flex-grow: 1;
+    flex-basis: 100%;
+}
+
+.form-group1 .input-container:nth-of-type(2),
+.form-group2 .input-container:nth-of-type(2) {
+    flex-grow: 1;
+    flex-basis: 19%;
+}
+
+.form-group1 .input-container:nth-of-type(3),
+.form-group2 .input-container:nth-of-type(3) {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 59%;
+}
+
+.form-group1 .input-container:nth-of-type(4) {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 100%;
+}
+
+.form-group2 .input-container:nth-of-type(1) {
+    flex-grow: 1;
+    flex-basis: 100%;
+}
+
+.form-group2 .input-container:nth-of-type(4) {
+    flex-grow: 1;
+    flex-basis: 100%;
+}
+
+label {
+    margin: 10px 0 5px;
+    position: relative;
+}
+
+/* .input-container:nth-of-type(1) label::after, .form-group1 .input-container:nth-of-type(2) label::after,
+.form-group1 .input-container:nth-of-type(3) label::after, .form-group1 .input-container:nth-of-type(4) label::after, 
+.form-group2 .input-container:nth-of-type(2) label::after,
+.form-group2 .input-container:nth-of-type(3) label::after, .form-group2 .input-container:nth-of-type(4) label::after
+{
+    content: '';
+    height: 10px;
+    width: 10px;
+    border: 0.5px solid black;
+    border-radius: 50%;
+    background-color: transparent;
+    position: absolute;
+    bottom: 7px;
+    margin-left: 10px;
+} */
+
+.input-container.equal label::after, .input-container.different label::after {
+    content: '';
+    height: 10px;
+    width: 10px;
+    border: 0.5px solid black;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 7px;
+    margin-left: 10px;
+}
+
+.input-container.equal label::after {
+    background-color: greenyellow;
+    border-color: green;
+}
+
+.input-container.different label::after {
+    background-color: red;
+    border-color: darkred;
 }
 
 .input-container {
     display: flex;
     flex-direction: column;
 }
-
-.input-container.file {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
-}
-
-/* #password1, #password2{
-    min-width: 200px;
-} */
 
 input[type="text"] {
     opacity: 0.8;
@@ -102,7 +200,7 @@ button {
     border-radius: 6px;
 }
 
-.input-container:nth-of-type(7){
+.input-container:nth-of-type(7) {
     width: 290px;
 }
 
@@ -123,6 +221,10 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.btns-container i {
+    font-size: 20px;
 }
 
 button[disabled] {

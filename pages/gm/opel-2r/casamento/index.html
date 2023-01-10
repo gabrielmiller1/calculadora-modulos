@@ -8,14 +8,22 @@
     <title>Casamento - Opel 2R ECU VHC</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="../../../../assets/styles/global.css">
-
+    <!----===== Boxicons CSS ===== -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
     <nav class="sidebar">
         <div class="header">
             <img src="../../../../assets/images/geral/logo.png" alt="" class="logo">
-            <img id="go-back-button" src="../../../../assets/images/geral/montadoras-logos/bmw-logo.png" alt="voltar">
+            <img id="go-back-button" src="../../../../assets/images/geral/go-back.svg" alt="voltar">
+        </div>
+        <div class="bottom-content">
+            <li class="">
+                <a href="#">
+                    <i class='bx bx-log-out icon'></i>
+                </a>
+            </li>
         </div>
     </nav>
     <section class="content">
@@ -26,19 +34,17 @@
         <div class="form">
             <div class="form-group1">
                 <div class="input-container file">
-                    <!-- <label for="arquivo">Escolher Arquivo</label> -->
+                    <label for="arquivo">Escolher Arquivo IMMO</label>
                     <input type="file" name="file" id="fileIMMO" />
                 </div>
-                <div class="container-form-group">
-                    <div class="input-container">
-                        <label for="">Senha</label>
-                        <input minlength="4" maxlength="4" type="text" name="password1" placeholder="Senha" value=""
-                            id="passwordIMMO" disabled />
-                    </div>
-                    <div class="input-container">
-                        <label for="">Chave MEC</label>
-                        <input type="text" name="mec-key" placeholder="Chave MEC" value="" id="mec-keyIMMO" disabled />
-                    </div>
+                <div class="input-container">
+                    <label for="">Senha</label>
+                    <input minlength="4" maxlength="4" type="text" name="password1" placeholder="Senha" value=""
+                        id="passwordIMMO" disabled />
+                </div>
+                <div class="input-container">
+                    <label for="">CS</label>
+                    <input type="text" name="Component Security" placeholder="Componente de Segurança" value="" id="inputComponentSecurityIMMO" disabled />
                 </div>
                 <div class="input-container">
                     <label for="">Chassi</label>
@@ -47,12 +53,12 @@
                 </div>
                 <div class="btns-container">
                     <button id="btnReadFileIMMO">Ler informações</button>
-                    <button id="btnIMMOToECU" disabled>IMMO -> ECU</button>
+                    <button id="btnIMMOToECU" disabled>IMMO <i class='bx bx-right-arrow-alt'></i> ECU</button>
                 </div>
             </div>
             <div class="form-group2">
                 <div class="input-container file">
-                    <!-- <label for="arquivo">Escolher Arquivo</label> -->
+                    <label for="arquivo">Escolher Arquivo ECU</label>
                     <input type="file" name="file" id="fileECU" />
                 </div>
                 <div class="input-container">
@@ -61,13 +67,19 @@
                         id="passwordECU" disabled />
                 </div>
                 <div class="input-container">
+                    <label for="">CS</label>
+                    <input type="text" name="Component Security" placeholder="Componente de Segurança" value="" id="inputComponentSecurityECU" disabled />
+                    <div class="check-circle"></div>
+                </div>
+                <div class="input-container">
                     <label for="">Chassi</label>
                     <input minlength="17" maxlength="17" type="text" name="chassi" placeholder="Chassi" value=""
                         id="chassiECU" disabled />
+                    <div class="check-circle"></div>
                 </div>
                 <div class="btns-container">
-                    <button id="btnReadFileECU">Ler informações</button>
-                    <button id="btnECUToIMMO" disabled>ECU -> IMMO</button>
+                    <button id="btnReadFileECU" disabled>Ler informações</button>
+                    <button id="btnECUToIMMO" disabled>ECU <i class='bx bx-right-arrow-alt'></i> IMMO</button>
                 </div>
             </div>
         </div>

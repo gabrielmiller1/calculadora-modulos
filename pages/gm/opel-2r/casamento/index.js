@@ -1,7 +1,7 @@
 const inputFileIMMO = document.querySelector('#fileIMMO'),
     inputPasswordIMMO = document.querySelector('#passwordIMMO'),
     inputChassiIMMO = document.querySelector('#chassiIMMO'),
-    inputMECKeyIMMO = document.querySelector('#mec-keyIMMO'),
+    inputComponentSecurityIMMO = document.querySelector('#inputComponentSecurityIMMO'),
     btnReadFileIMMO = document.querySelector('#btnReadFileIMMO'),
     btnIMMOToECU = document.querySelector('#btnIMMOToECU'),
     backButton = document.getElementById('go-back-button');
@@ -9,6 +9,7 @@ const inputFileIMMO = document.querySelector('#fileIMMO'),
 const inputFileECU = document.querySelector('#fileECU'),
     inputPasswordECU = document.querySelector('#passwordECU'),
     inputChassiECU = document.querySelector('#chassiECU'),
+    inputComponentSecurityECU = document.querySelector('#inputComponentSecurityECU'),
     btnReadFileECU = document.querySelector('#btnReadFileECU'),
     btnECUToIMMO = document.querySelector('#btnECUToIMMO');
 
@@ -24,23 +25,27 @@ let bufferIMMO,
 let fileIMMO;
 let fileECU;
 
-
 btnReadFileIMMO.addEventListener("click", function () {
     fileIMMO = inputFileIMMO.files[0];
     readFile(fileIMMO, '1');
-    console.log('Botão IMMO');
 });
 
 btnReadFileECU.addEventListener("click", function () {
     fileECU = inputFileECU.files[0];
     readFile(fileECU, '2');
-    console.log('Botão ECU');
+});
+
+inputFileIMMO.addEventListener('change', () => {
+    validateFile(inputFileIMMO.files[0], '1');
+});
+
+inputFileECU.addEventListener('change', () => {
+    validateFile(inputFileECU.files[0], '2');
 });
 
 function readFile(file, typeDevice) {
-    console.log('Função readFile');
     try {
-        validateFile(file);
+        validateFile(file, typeDevice);
         const reader = new FileReader(); // Cria um leitor de arquivo.
         reader.onload = function () {
             const buffer = reader.result;
@@ -49,6 +54,11 @@ function readFile(file, typeDevice) {
             const valores = readValues(data, typeDevice);
             showValues(valores, typeDevice);
             handleButtons(typeDevice);
+
+            // Chama a função compareAndHighlightFormValues aqui:
+            if (typeDevice === '2') {
+                compareFilesAndChangeColor();
+            }
         };
         reader.readAsArrayBuffer(file);
         buffer = new ArrayBuffer(reader.result);
@@ -57,64 +67,65 @@ function readFile(file, typeDevice) {
     }
 }
 
-function validateFile(file) {
-    console.log('Função validateFile');
+function validateFile(file, typeDevice) {
+
+    let corretSize;
+    typeDevice == '1' ? corretSize = 512 : corretSize = 528;
+
     if (!file) {
+        alert("Nenhum arquivo selecionado");
         throw new Error("Nenhum arquivo selecionado");
     }
-    if (!file.type.startsWith("application/")) {
+    if (!file.type.startsWith("application/") || file.size !== corretSize) {
+        alert("Arquivo inválido");
         throw new Error("Arquivo inválido");
     }
 }
 
 function readValues(data, typeDevice) {
-    console.log('Função readValues');
     if (typeDevice == '1') {
         const password = readValue(data, 26, 27);
         const chassi = hexToAscii(readValue(data, 68, 84));
-        const mecKey = hexToAscii(readValue(data, 86, 90));
+        const componentSecurityIMMO = readValue(data, 189, 204);
         return {
             password: password != "" ? password : `Diferentes, ${password}`,
             chassi: chassi,
-            mecKey: mecKey
+            componentSecurityIMMO: componentSecurityIMMO
         };
     } else {
-        const password = readValue(data, 26, 27);
-        const chassi = hexToAscii(readValue(data, 68, 84));
+        const password = readValue(data, 164, 165);
+        const chassi = hexToAscii(readValue(data, 91, 107));
+        const componentSecurityECU = readValue(data, 148, 163);
         return {
             password: password != "" ? password : `Diferentes, ${password}`,
-            chassi: chassi
+            chassi: chassi,
+            componentSecurityECU: componentSecurityECU
         };
     }
 }
 
 function showValues(valores, typeDevice) {
-    console.log('Função showValues');
     if (typeDevice == '1') {
         inputPasswordIMMO.value = valores.password;
         inputChassiIMMO.value = valores.chassi;
-        inputMECKeyIMMO.value = valores.mecKey;
+        inputComponentSecurityIMMO.value = valores.componentSecurityIMMO;
     } else {
         inputPasswordECU.value = valores.password;
         inputChassiECU.value = valores.chassi;
+        inputComponentSecurityECU.value = valores.componentSecurityECU;
     }
 }
 
 function handleButtons(typeDevice) {
-    console.log('Função handleButtons');
-
-    if (!btnIMMOToECU.contains('disabled')) {
-        btnReadFileIMMO.setAttribute("disabled", "disabled");
-    } else if (!btnECUToIMMO.contains('disabled')) {
-        btnReadFileECU.setAttribute("disabled", "disabled");
-    }
-
     if (typeDevice == '1') {
         btnIMMOToECU.removeAttribute("disabled");
-    } else {
+        btnReadFileIMMO.setAttribute("disabled", "disabled");
+        btnReadFileECU.removeAttribute("disabled");
+
+    } else if (typeDevice == '2') {
         btnECUToIMMO.removeAttribute("disabled");
+        btnReadFileECU.setAttribute("disabled", "disabled");
     }
-    return
 }
 
 // Auxiliares.
@@ -182,38 +193,44 @@ backButton.addEventListener('click', () => {
     ipcRenderer.send('go-back');
 });
 
-
 // Add function to read form values for IMMO file
 function readIMMOFormValues() {
-    console.log('Função readIMMOFormValues');
-
     const password = inputPasswordIMMO.value;
     const chassi = inputChassiIMMO.value;
-    const mecKey = inputMECKeyIMMO.value;
-    return { password, chassi, mecKey };
+    const componentSecurity = inputComponentSecurityIMMO.value;
+    return { password, chassi, componentSecurity };
 }
 
 function readECUFormValues() {
-    console.log('Função readECUFormValues');
-
-    const password = inputPasswordIMMO.value;
-    const chassi = inputChassiIMMO.value;
-    return { password, chassi };
+    const password = inputPasswordECU.value;
+    const chassi = inputChassiECU.value;
+    const componentSecurity = inputComponentSecurityECU.value;
+    return { password, chassi, componentSecurity };
 }
 
 function salvar(typeDevice, file) {
-    console.log('Função salvar');
     const values = typeDevice == '1' ? readIMMOFormValues() : readECUFormValues();
-    let buffer = typeDevice == '1' ? bufferIMMO : bufferECU;
-    // Tratando entrada.
-    password = hexToAscii(values.password);
-    chassi = values.chassi;
+    const buffer = typeDevice == '1' ? bufferECU : bufferIMMO;
 
-    const dataView = new DataView(new ArrayBuffer(buffer));
+    // Tratando entrada.
+    let password = hexToAscii(values.password);
+    let chassi = values.chassi;
+    let componentSecurity = hexToAscii(values.componentSecurity);
+
+    const dataView = new DataView(buffer);
 
     // Atualiza valores novo arquivo.
-    updateData(password, dataView, 26);
-    updateData(chassi, dataView, 68);
+    if (typeDevice == '1') { //Immo to ECU.
+        updateData(password, dataView, 164);
+        updateData(chassi, dataView, 91);
+        updateData(componentSecurity, dataView, 148);
+    } else if (typeDevice == '2') { //Ecu to Immo.
+        updateData(password, dataView, 26);
+        updateData(password, dataView, 178);
+        updateData(chassi, dataView, 68);
+        updateData(componentSecurity, dataView, 189);
+
+    }
 
     const newFile = new File([buffer], `${file.name.slice(0, -4)}-casado.bin`, { type: file.type }); // Cria um novo arquivo.
 
@@ -228,10 +245,48 @@ function salvar(typeDevice, file) {
     resetInputsAndButtons();
 }
 
+function compareFilesAndChangeColor() {
+    const immoValues = readIMMOFormValues();
+    const ecuValues = readECUFormValues();
+
+    const inputContainers1 = document.querySelectorAll('.form-group1 .input-container');
+    const inputContainers2 = document.querySelectorAll('.form-group2 .input-container');
+    if (!inputContainers1) return;
+    if (!inputContainers2) return;
+
+    const addClass = (index, className) => {
+        inputContainers1[index].classList.add(className);
+        inputContainers2[index].classList.add(className);
+    }
+
+    if (immoValues.password === ecuValues.password) {
+        addClass(1, 'equal');
+    } else {
+        addClass(1, 'different');
+    }
+
+    if (immoValues.chassi === ecuValues.chassi) {
+        addClass(2, 'equal');
+    } else {
+        addClass(2, 'different');
+    }
+
+    if (immoValues.componentSecurity === ecuValues.componentSecurity) {
+        addClass(3, 'equal');
+    } else {
+        addClass(3, 'different');
+    }
+}
+
 btnIMMOToECU.addEventListener('click', function () {
-    salvar('1', fileIMMO);
+    salvar('1', fileECU);
 });
 
 btnECUToIMMO.addEventListener('click', function () {
-    salvar('2', fileECU);
-});
+    salvar('2', fileIMMO);
+}); 
+
+// Fechar aplicação.
+document.querySelector('.bottom-content li a').addEventListener('click', () => {
+    ipcRenderer.send('close-app');
+})

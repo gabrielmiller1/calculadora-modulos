@@ -91,6 +91,8 @@ function salvar() {
   cs = hexToAscii(inputCS.value); // problema
   mecKey = inputMECKey.value;
 
+  console.log(password1)
+
   const dataView = new DataView(buffer);
 
   // Atualiza valores novo arquivo.
@@ -225,3 +227,8 @@ const backButton = document.getElementById('go-back-button');
 backButton.addEventListener('click', () => {
   ipcRenderer.send('go-back');
 });
+
+// Fechar aplicação.
+document.querySelector('.bottom-content li a').addEventListener('click', () => {
+  ipcRenderer.send('close-app');
+})
